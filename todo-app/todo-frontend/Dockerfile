@@ -8,6 +8,8 @@ RUN npm ci
 
 ENV VITE_BACKEND_URL=http://host.docker.internal:3000
 
+RUN npm test
+
 RUN npm run build
 
 RUN npm install -g serve
