@@ -1,0 +1,58 @@
+docker exec -it todo-backend-mongo-1 bash
+
+root@406093496ea5:/# mongosh -u root -p example --authenticationDatabase admin
+
+test> show dbs
+
+admin         100.00 KiB
+config         60.00 KiB
+local          72.00 KiB
+the_database   72.00 KiB
+
+test> use the_database
+switched to db the_database
+
+the_database> show collections
+todos
+
+the_database> db.todos.find({})
+[
+  {
+    _id: ObjectId('6a1aa6cddc9e0cacd0d1a7bb'),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId('6a1aa6cddc9e0cacd0d1a7bc'),
+    text: 'Learn about containers',
+    done: false
+  }
+]
+
+the_database> db.todos.insertOne({
+  text: "Increase the number of tools in my tool belt",
+  done: false
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6aa5028591a8b721f4d1a7bb')
+}
+
+the_database> db.todos.find({})
+[
+  {
+    _id: ObjectId('6a1aa6cddc9e0cacd0d1a7bb'),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId('6a1aa6cddc9e0cacd0d1a7bc'),
+    text: 'Learn about containers',
+    done: false
+  },
+  {
+    _id: ObjectId('6aa5028591a8b721f4d1a7bb'),
+    text: 'Increase the number of tools in my tool belt',
+    done: false
+  }
+]
