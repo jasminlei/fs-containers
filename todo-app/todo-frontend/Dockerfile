@@ -6,12 +6,10 @@ COPY . .
 
 RUN npm ci
 
-ENV VITE_BACKEND_URL=http://host.docker.internal:3000
-
-RUN npm test
+ENV VITE_BACKEND_URL=/api
 
 RUN npm run build
 
 RUN npm install -g serve
 
-CMD ["serve", "-n", "dist"]
+CMD ["serve", "-s", "dist", "-l", "3000"]
